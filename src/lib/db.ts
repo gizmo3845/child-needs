@@ -1,8 +1,12 @@
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { Database, List, Item } from "@/types";
 
-const DB_PATH = join(process.cwd(), "data", "db.json");
+// Use /app/data in production (Docker), otherwise use cwd/data
+const DATA_DIR = process.env.NODE_ENV === "production"
+  ? "/app/data"
+  : join(process.cwd(), "data");
+const DB_PATH = join(DATA_DIR, "db.json");
 
 const defaultDb: Database = {
   lists: [],
@@ -15,7 +19,14 @@ const defaultDb: Database = {
   ],
 };
 
+function ensureDataDir(): void {
+  if (!existsSync(DATA_DIR)) {
+    mkdirSync(DATA_DIR, { recursive: true });
+  }
+}
+
 function readDb(): Database {
+  ensureDataDir();
   if (!existsSync(DB_PATH)) {
     writeDb(defaultDb);
     return defaultDb;
@@ -25,6 +36,7 @@ function readDb(): Database {
 }
 
 function writeDb(db: Database): void {
+  ensureDataDir();
   writeFileSync(DB_PATH, JSON.stringify(db, null, 2), "utf-8");
 }
 
