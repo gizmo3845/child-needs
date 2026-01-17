@@ -6,7 +6,8 @@
       "Bash(npm run build:*)",
       "Bash(timeout 10 npm run dev:*)",
       "Bash(curl:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
