@@ -1,0 +1,49 @@
+{
+  "lists": [
+    {
+      "id": "itneh8ms",
+      "childName": "Felix",
+      "items": [
+        "item-1",
+        "item-2"
+      ],
+      "createdAt": "2026-01-17T19:35:43.404Z",
+      "updatedAt": "2026-01-17T19:35:43.404Z"
+    },
+    {
+      "id": "zn8pgebn",
+      "childName": "Maelle",
+      "items": [
+        "item-3"
+      ],
+      "createdAt": "2026-01-17T19:36:24.110Z",
+      "updatedAt": "2026-01-17T19:36:24.110Z"
+    }
+  ],
+  "items": [
+    {
+      "id": "item-1",
+      "name": "Biberon"
+    },
+    {
+      "id": "item-2",
+      "name": "Couches"
+    },
+    {
+      "id": "item-3",
+      "name": "Doudou"
+    },
+    {
+      "id": "item-4",
+      "name": "Tétine"
+    },
+    {
+      "id": "item-5",
+      "name": "Change de vêtements"
+    },
+    {
+      "id": "item-yhmzzswy",
+      "name": "Coton"
+    }
+  ]
+}
