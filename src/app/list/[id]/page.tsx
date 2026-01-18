@@ -67,9 +67,6 @@ export default async function ListPage({ params }: PageProps) {
           </ul>
         )}
 
-        <footer className="mt-12 text-center">
-          <p className="text-xs text-gray-600">Child Needs</p>
-        </footer>
       </div>
     </div>
   );
@@ -84,7 +81,7 @@ export async function generateMetadata({ params }: PageProps) {
   }
 
   return {
-    title: `Liste de ${list.childName} - Child Needs`,
+    title: `Liste de ${list.childName}`,
     description: `Éléments à apporter pour ${list.childName}`,
   };
 }
