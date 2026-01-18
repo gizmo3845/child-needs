@@ -16,10 +16,10 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
     .map((itemId) => items.find((i) => i.id === itemId))
     .filter(Boolean) as Item[];
 
-  const copyShareUrl = async () => {
+  const shareList = async () => {
     const url = `${window.location.origin}/list/${list.id}`;
     await navigator.clipboard.writeText(url);
-    alert("URL copiée !");
+    window.open(url, "_blank");
   };
 
   return (
@@ -33,7 +33,7 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
             </p>
           </div>
           <div className="flex gap-2">
-            <Button variant="ghost" size="sm" onClick={copyShareUrl} title="Copier l'URL">
+            <Button variant="ghost" size="sm" onClick={shareList} title="Partager">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4"
