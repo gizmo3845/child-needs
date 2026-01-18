@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { QRCodeSVG } from "qrcode.react";
+import { useState, useRef } from "react";
+import { QRCodeCanvas } from "qrcode.react";
 import { List, Item } from "@/types";
 import { Card, CardContent } from "./ui/Card";
 import { Button } from "./ui/Button";
@@ -16,6 +16,7 @@ interface ListCardProps {
 
 export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
   const [showQrCode, setShowQrCode] = useState(false);
+  const qrRef = useRef<HTMLDivElement>(null);
 
   const listItems = list.items
     .map((itemId) => items.find((i) => i.id === itemId))
@@ -27,6 +28,16 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
     const url = getShareUrl();
     await navigator.clipboard.writeText(url);
     window.open(url, "_blank");
+  };
+
+  const downloadQrCode = () => {
+    const canvas = qrRef.current?.querySelector("canvas");
+    if (!canvas) return;
+
+    const link = document.createElement("a");
+    link.download = `qrcode-${list.childName}.jpg`;
+    link.href = canvas.toDataURL("image/jpeg", 1.0);
+    link.click();
   };
 
   return (
@@ -129,11 +140,16 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
         title={`QR Code - ${list.childName}`}
       >
         <div className="flex flex-col items-center gap-4">
-          <div className="bg-white p-4 rounded-lg">
-            <QRCodeSVG value={getShareUrl()} size={200} />
+          <div
+            ref={qrRef}
+            onClick={downloadQrCode}
+            className="bg-white p-4 rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+            title="Cliquez pour télécharger"
+          >
+            <QRCodeCanvas value={getShareUrl()} size={200} />
           </div>
           <p className="text-sm text-gray-400 text-center">
-            Scannez ce code pour accéder à la liste
+            Cliquez sur le QR code pour le télécharger
           </p>
         </div>
       </Modal>
