@@ -68,7 +68,7 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <h1 className="text-2xl font-bold text-white text-center">
-            Child Needs
+            Listes parents
           </h1>
           <p className="text-gray-400 text-center mt-2">
             Espace administration
