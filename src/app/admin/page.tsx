@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { List, Item } from "@/types";
+import { List, Item, ListItem } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { ListCard } from "@/components/ListCard";
@@ -65,7 +65,7 @@ export default function AdminPage() {
     }
   };
 
-  const handleSave = async (childName: string, selectedItems: string[]) => {
+  const handleSave = async (childName: string, selectedItems: ListItem[]) => {
     try {
       if (editingList) {
         const response = await fetch(`/api/lists/${editingList.id}`, {

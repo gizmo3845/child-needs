@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getListById, updateList, deleteList } from "@/lib/db";
+import { ListItem } from "@/types";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -30,7 +31,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
     const { id } = await params;
     const body = await request.json();
-    const updates: { childName?: string; items?: string[] } = {};
+    const updates: { childName?: string; items?: ListItem[] } = {};
 
     if (body.childName !== undefined) {
       updates.childName = body.childName.trim();

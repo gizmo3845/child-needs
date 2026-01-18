@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
-import { Database, List, Item } from "@/types";
+import { Database, List, Item, ListItem } from "@/types";
 
 // Use /app/data in production (Docker), otherwise use cwd/data
 const DATA_DIR = process.env.NODE_ENV === "production"
@@ -32,7 +32,20 @@ function readDb(): Database {
     return defaultDb;
   }
   const data = readFileSync(DB_PATH, "utf-8");
-  return JSON.parse(data);
+  const db = JSON.parse(data);
+
+  // Migration: convert old format (string[]) to new format (ListItem[])
+  db.lists = db.lists.map((list: List) => ({
+    ...list,
+    items: list.items.map((item: ListItem | string) => {
+      if (typeof item === "string") {
+        return { itemId: item, quantity: 1, note: "" };
+      }
+      return item;
+    }),
+  }));
+
+  return db;
 }
 
 function writeDb(db: Database): void {
@@ -55,7 +68,7 @@ export function getListById(id: string): List | undefined {
   return db.lists.find((list) => list.id === id);
 }
 
-export function createList(childName: string, items: string[] = []): List {
+export function createList(childName: string, items: ListItem[] = []): List {
   const db = readDb();
   const now = new Date().toISOString();
   const newList: List = {
@@ -137,7 +150,7 @@ export function deleteItem(id: string): boolean {
   // Also remove this item from all lists
   db.lists = db.lists.map((list) => ({
     ...list,
-    items: list.items.filter((itemId) => itemId !== id),
+    items: list.items.filter((listItem) => listItem.itemId !== id),
   }));
 
   db.items.splice(index, 1);
@@ -147,5 +160,7 @@ export function deleteItem(id: string): boolean {
 
 export function getItemUsageCount(itemId: string): number {
   const db = readDb();
-  return db.lists.filter((list) => list.items.includes(itemId)).length;
+  return db.lists.filter((list) =>
+    list.items.some((listItem) => listItem.itemId === itemId)
+  ).length;
 }

@@ -18,9 +18,13 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
   const [showQrCode, setShowQrCode] = useState(false);
   const qrRef = useRef<HTMLDivElement>(null);
 
-  const listItems = list.items
-    .map((itemId) => items.find((i) => i.id === itemId))
-    .filter(Boolean) as Item[];
+  const listItemsWithDetails = list.items
+    .map((listItem) => {
+      const item = items.find((i) => i.id === listItem.itemId);
+      if (!item) return null;
+      return { ...listItem, name: item.name };
+    })
+    .filter(Boolean);
 
   const getShareUrl = () => `${window.location.origin}/list/${list.id}`;
 
@@ -48,7 +52,7 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
             <div>
               <h3 className="text-lg font-semibold text-white">{list.childName}</h3>
               <p className="text-sm text-gray-400">
-                {listItems.length} élément{listItems.length !== 1 ? "s" : ""}
+                {listItemsWithDetails.length} élément{listItemsWithDetails.length !== 1 ? "s" : ""}
               </p>
             </div>
             <div className="flex gap-2">
@@ -119,14 +123,14 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
             </div>
           </div>
 
-          {listItems.length > 0 && (
+          {listItemsWithDetails.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {listItems.map((item) => (
+              {listItemsWithDetails.map((item) => (
                 <span
-                  key={item.id}
+                  key={item!.itemId}
                   className="px-2 py-1 text-xs bg-[#2a2a2a] text-gray-300 rounded-md"
                 >
-                  {item.name}
+                  {item!.quantity > 1 && `${item!.quantity}x `}{item!.name}
                 </span>
               ))}
             </div>

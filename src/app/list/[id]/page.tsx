@@ -5,6 +5,17 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export default async function ListPage({ params }: PageProps) {
   const { id } = await params;
   const list = getListById(id);
@@ -14,8 +25,12 @@ export default async function ListPage({ params }: PageProps) {
   }
 
   const allItems = getAllItems();
-  const listItems = list.items
-    .map((itemId) => allItems.find((i) => i.id === itemId))
+  const listItemsWithDetails = list.items
+    .map((listItem) => {
+      const item = allItems.find((i) => i.id === listItem.itemId);
+      if (!item) return null;
+      return { ...listItem, name: item.name };
+    })
     .filter(Boolean);
 
   return (
@@ -42,31 +57,47 @@ export default async function ListPage({ params }: PageProps) {
             Liste de {list.childName}
           </h1>
           <p className="text-gray-400">
-            {listItems.length} élément{listItems.length !== 1 ? "s" : ""} à
+            {listItemsWithDetails.length} élément{listItemsWithDetails.length !== 1 ? "s" : ""} à
             apporter
+          </p>
+          <p className="text-xs text-gray-500 mt-2">
+            Mise à jour le {formatDate(list.updatedAt)}
           </p>
         </header>
 
-        {listItems.length === 0 ? (
+        {listItemsWithDetails.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-gray-500">Aucun élément dans cette liste.</p>
           </div>
         ) : (
           <ul className="space-y-3">
-            {listItems.map((item) => (
+            {listItemsWithDetails.map((item) => (
               <li
-                key={item!.id}
-                className="flex items-center gap-4 p-4 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl"
+                key={item!.itemId}
+                className="p-4 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl"
               >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full border-2 border-[#6B57FF] flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-[#6B57FF]" />
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full border-2 border-[#6B57FF] flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-[#6B57FF]" />
+                  </div>
+                  <span className="text-white font-medium flex-1">
+                    {item!.quantity > 1 && (
+                      <span className="text-[#6B57FF] font-bold mr-2">
+                        {item!.quantity}x
+                      </span>
+                    )}
+                    {item!.name}
+                  </span>
                 </div>
-                <span className="text-white font-medium">{item!.name}</span>
+                {item!.note && (
+                  <p className="text-sm text-gray-400 mt-2 ml-10 italic">
+                    {item!.note}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
         )}
-
       </div>
     </div>
   );

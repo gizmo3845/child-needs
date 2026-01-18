@@ -3,10 +3,16 @@ export interface Item {
   name: string;
 }
 
+export interface ListItem {
+  itemId: string;
+  quantity: number;
+  note: string;
+}
+
 export interface List {
   id: string;
   childName: string;
-  items: string[]; // Array of item IDs
+  items: ListItem[];
   createdAt: string;
   updatedAt: string;
 }
