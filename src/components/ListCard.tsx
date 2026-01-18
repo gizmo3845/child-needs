@@ -14,6 +14,16 @@ interface ListCardProps {
   onDelete: (list: List) => void;
 }
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
   const [showQrCode, setShowQrCode] = useState(false);
   const qrRef = useRef<HTMLDivElement>(null);
@@ -53,6 +63,9 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
               <h3 className="text-lg font-semibold text-white">{list.childName}</h3>
               <p className="text-sm text-gray-400">
                 {listItemsWithDetails.length} élément{listItemsWithDetails.length !== 1 ? "s" : ""}
+              </p>
+              <p className="text-xs text-gray-500">
+                {formatDate(list.updatedAt)}
               </p>
             </div>
             <div className="flex gap-2">
