@@ -52,12 +52,8 @@ export default async function ListPage({ params }: PageProps) {
             </svg>
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">
-            Liste de {list.childName}
+            Apporter pour la prochaine fois:
           </h1>
-          <p className="text-gray-400">
-            {listItemsWithDetails.length} élément{listItemsWithDetails.length !== 1 ? "s" : ""} à
-            apporter
-          </p>
           <p className="text-xs text-gray-500 mt-2">
             Mise à jour le {formatDate(list.updatedAt)}
           </p>
@@ -79,12 +75,12 @@ export default async function ListPage({ params }: PageProps) {
                     <div className="w-2 h-2 rounded-full bg-[#6B57FF]" />
                   </div>
                   <span className="text-white font-medium flex-1">
+                    {item!.name}
                     {item!.quantity > 1 && (
-                      <span className="text-[#6B57FF] font-bold mr-2">
-                        {item!.quantity}x
+                      <span className="text-[#6B57FF] font-bold ml-1">
+                        : {item!.quantity}
                       </span>
                     )}
-                    {item!.name}
                   </span>
                 </div>
                 {item!.note && (
