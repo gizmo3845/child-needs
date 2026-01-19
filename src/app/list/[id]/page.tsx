@@ -52,7 +52,7 @@ export default async function ListPage({ params }: PageProps) {
             </svg>
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">
-            Apporter pour la prochaine fois:
+            Apporter pour la prochaine fois
           </h1>
           <p className="text-xs text-gray-500 mt-2">
             Mise à jour le {formatDate(list.updatedAt)}
