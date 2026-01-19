@@ -132,15 +132,19 @@ export function ListEditor({ list, items, onSave, onCancel }: ListEditorProps) {
                   {selected && (
                     <div className="flex items-center gap-2">
                       <label className="text-xs text-gray-400">Qté:</label>
-                      <input
-                        type="number"
-                        min="1"
+                      <select
                         value={listItem?.quantity || 1}
                         onChange={(e) =>
-                          updateQuantity(item.id, parseInt(e.target.value) || 1)
+                          updateQuantity(item.id, parseInt(e.target.value))
                         }
-                        className="w-14 px-2 py-1 text-sm bg-[#1a1a1a] border border-[#3a3a3a] rounded text-white text-center"
-                      />
+                        className="w-16 px-2 py-1 text-sm bg-[#1a1a1a] border border-[#3a3a3a] rounded text-white text-center appearance-none"
+                      >
+                        {Array.from({ length: 20 }, (_, i) => i + 1).map((n) => (
+                          <option key={n} value={n}>
+                            {n}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   )}
                 </div>
