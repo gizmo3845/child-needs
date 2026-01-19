@@ -6,11 +6,11 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className = "", variant = "default", children, ...props }, ref) => {
-    const baseStyles = "rounded-xl";
+    const baseStyles = "rounded-2xl";
 
     const variants = {
-      default: "bg-[#1a1a1a] border border-[#2a2a2a]",
-      elevated: "bg-[#1a1a1a] border border-[#2a2a2a] shadow-lg shadow-black/20",
+      default: "bg-white border border-gray-100",
+      elevated: "bg-white border border-gray-100 shadow-lg shadow-gray-200/50",
     };
 
     return (
@@ -33,7 +33,7 @@ export const CardHeader = forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <div
     ref={ref}
-    className={`px-6 py-4 border-b border-[#2a2a2a] ${className}`}
+    className={`px-6 py-4 border-b border-gray-100 ${className}`}
     {...props}
   >
     {children}
@@ -59,7 +59,7 @@ export const CardFooter = forwardRef<
 >(({ className = "", children, ...props }, ref) => (
   <div
     ref={ref}
-    className={`px-6 py-4 border-t border-[#2a2a2a] ${className}`}
+    className={`px-6 py-4 border-t border-gray-100 ${className}`}
     {...props}
   >
     {children}

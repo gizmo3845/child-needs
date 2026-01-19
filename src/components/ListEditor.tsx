@@ -78,7 +78,7 @@ export function ListEditor({ list, items, onSave, onCancel }: ListEditorProps) {
       />
 
       <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
           Éléments à apporter
         </label>
         <div className="space-y-2 max-h-80 overflow-y-auto">
@@ -89,10 +89,10 @@ export function ListEditor({ list, items, onSave, onCancel }: ListEditorProps) {
             return (
               <div
                 key={item.id}
-                className={`p-3 rounded-lg border transition-all ${
+                className={`p-3 rounded-xl border transition-all ${
                   selected
-                    ? "bg-[#6B57FF]/10 border-[#6B57FF]"
-                    : "bg-[#2a2a2a] border-[#3a3a3a]"
+                    ? "bg-[#fef8e6] border-[#F5C745]"
+                    : "bg-gray-50 border-gray-200"
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -101,8 +101,8 @@ export function ListEditor({ list, items, onSave, onCancel }: ListEditorProps) {
                     onClick={() => toggleItem(item.id)}
                     className={`w-5 h-5 rounded border flex items-center justify-center flex-shrink-0 ${
                       selected
-                        ? "bg-[#6B57FF] border-[#6B57FF]"
-                        : "border-[#4a4a4a]"
+                        ? "bg-[#F5C745] border-[#F5C745]"
+                        : "border-gray-300 bg-white"
                     }`}
                   >
                     {selected && (
@@ -124,20 +124,20 @@ export function ListEditor({ list, items, onSave, onCancel }: ListEditorProps) {
                   </button>
                   <span
                     className={`flex-1 ${
-                      selected ? "text-white" : "text-gray-300"
+                      selected ? "text-gray-900" : "text-gray-600"
                     }`}
                   >
                     {item.name}
                   </span>
                   {selected && (
                     <div className="flex items-center gap-2">
-                      <label className="text-xs text-gray-400">Qté:</label>
+                      <label className="text-xs text-gray-500">Qté:</label>
                       <select
                         value={listItem?.quantity || 1}
                         onChange={(e) =>
                           updateQuantity(item.id, parseInt(e.target.value))
                         }
-                        className="w-16 px-2 py-1 text-sm bg-[#1a1a1a] border border-[#3a3a3a] rounded text-white text-center appearance-none"
+                        className="w-16 px-2 py-1 text-sm bg-white border border-gray-200 rounded-lg text-gray-900 text-center"
                       >
                         {Array.from({ length: 20 }, (_, i) => i + 1).map((n) => (
                           <option key={n} value={n}>
@@ -155,7 +155,7 @@ export function ListEditor({ list, items, onSave, onCancel }: ListEditorProps) {
                       value={listItem?.note || ""}
                       onChange={(e) => updateNote(item.id, e.target.value)}
                       placeholder="Note (optionnel)..."
-                      className="w-full px-3 py-1.5 text-sm bg-[#1a1a1a] border border-[#3a3a3a] rounded text-white placeholder-gray-500"
+                      className="w-full px-3 py-1.5 text-sm bg-white border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400"
                     />
                   </div>
                 )}

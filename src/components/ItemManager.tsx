@@ -98,8 +98,8 @@ export function ItemManager({
                 ) : (
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <span className="text-white">{item.name}</span>
-                      <span className="text-xs text-gray-500 bg-[#2a2a2a] px-2 py-0.5 rounded">
+                      <span className="text-gray-900">{item.name}</span>
+                      <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
                         {item.usageCount} liste{item.usageCount !== 1 ? "s" : ""}
                       </span>
                     </div>
@@ -139,7 +139,7 @@ export function ItemManager({
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 text-red-400"
+                          className="h-4 w-4 text-red-500"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"

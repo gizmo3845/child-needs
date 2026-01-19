@@ -59,11 +59,11 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
         <CardContent className="space-y-4">
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-white">{list.childName}</h3>
-              <p className="text-sm text-gray-400">
+              <h3 className="text-lg font-semibold text-gray-900">{list.childName}</h3>
+              <p className="text-sm text-gray-500">
                 {listItemsWithDetails.length} élément{listItemsWithDetails.length !== 1 ? "s" : ""}
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-400">
                 {formatDate(list.updatedAt)}
               </p>
             </div>
@@ -119,7 +119,7 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
               <Button variant="ghost" size="sm" onClick={() => onDelete(list)} title="Supprimer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-red-400"
+                  className="h-4 w-4 text-red-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -140,7 +140,7 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
               {listItemsWithDetails.map((item) => (
                 <span
                   key={item!.itemId}
-                  className="px-2 py-1 text-xs bg-[#2a2a2a] text-gray-300 rounded-md"
+                  className="px-2 py-1 text-xs bg-[#fef8e6] text-[#b8941a] rounded-full font-medium"
                 >
                   {item!.quantity > 1 && `${item!.quantity}x `}{item!.name}
                 </span>
@@ -159,12 +159,12 @@ export function ListCard({ list, items, onEdit, onDelete }: ListCardProps) {
           <div
             ref={qrRef}
             onClick={downloadQrCode}
-            className="bg-white p-4 rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+            className="bg-white p-4 rounded-lg cursor-pointer hover:opacity-90 transition-opacity border border-gray-100"
             title="Cliquez pour télécharger"
           >
             <QRCodeCanvas value={getShareUrl()} size={200} />
           </div>
-          <p className="text-sm text-gray-400 text-center">
+          <p className="text-sm text-gray-500 text-center">
             Cliquez sur le QR code pour le télécharger
           </p>
         </div>

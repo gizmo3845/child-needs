@@ -64,18 +64,36 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-[#fef8e6] to-[#faf9f7]">
+      <Card variant="elevated" className="w-full max-w-md">
         <CardHeader>
-          <h1 className="text-2xl font-bold text-white text-center">
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-16 rounded-full bg-[#F5C745] flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                />
+              </svg>
+            </div>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 text-center">
             Listes parents
           </h1>
-          <p className="text-gray-400 text-center mt-2">
+          <p className="text-gray-500 text-center mt-2">
             Espace administration
           </p>
         </CardHeader>
         <CardContent>
-          <Suspense fallback={<div className="text-gray-400">Chargement...</div>}>
+          <Suspense fallback={<div className="text-gray-500">Chargement...</div>}>
             <LoginForm />
           </Suspense>
         </CardContent>

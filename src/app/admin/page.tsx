@@ -96,20 +96,20 @@ export default function AdminPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-400">Chargement...</p>
+        <p className="text-gray-500">Chargement...</p>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen">
-      <header className="border-b border-[#2a2a2a] bg-[#1a1a1a]">
+      <header className="border-b border-gray-100 bg-white shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-white">Administration</h1>
+          <h1 className="text-xl font-bold text-gray-900">Administration</h1>
           <div className="flex items-center gap-4">
             <Link
               href="/admin/items"
-              className="text-gray-400 hover:text-white transition-colors text-sm"
+              className="text-gray-500 hover:text-[#F5C745] transition-colors text-sm"
             >
               Gérer les éléments
             </Link>
@@ -122,7 +122,7 @@ export default function AdminPage() {
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold text-white">
+          <h2 className="text-lg font-semibold text-gray-900">
             Listes ({lists.length})
           </h2>
           <Button onClick={handleCreate}>Nouvelle liste</Button>
@@ -130,7 +130,7 @@ export default function AdminPage() {
 
         {lists.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-400 mb-4">Aucune liste pour le moment.</p>
+            <p className="text-gray-500 mb-4">Aucune liste pour le moment.</p>
             <Button onClick={handleCreate}>Créer une liste</Button>
           </div>
         ) : (

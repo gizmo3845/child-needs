@@ -32,10 +32,10 @@ export default async function ListPage({ params }: PageProps) {
     .filter(Boolean);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d0d0d] to-[#1a1a1a]">
+    <div className="min-h-screen bg-gradient-to-b from-[#fef8e6] to-[#faf9f7]">
       <div className="max-w-lg mx-auto px-4 py-8">
         <header className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-[#6B57FF] to-[#3B74EE] mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#F5C745] mb-4 shadow-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8 text-white"
@@ -51,7 +51,7 @@ export default async function ListPage({ params }: PageProps) {
               />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold text-white mb-2">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
             Apporter pour la prochaine fois
           </h1>
           <p className="text-xs text-gray-500 mt-2">
@@ -68,23 +68,23 @@ export default async function ListPage({ params }: PageProps) {
             {listItemsWithDetails.map((item) => (
               <li
                 key={item!.itemId}
-                className="p-4 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl"
+                className="p-4 bg-white border border-gray-100 rounded-2xl shadow-sm"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full border-2 border-[#6B57FF] flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-[#6B57FF]" />
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full border-2 border-[#F5C745] flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-[#F5C745]" />
                   </div>
-                  <span className="text-white font-medium flex-1">
+                  <span className="text-gray-900 font-medium flex-1">
                     {item!.name}
                     {item!.quantity > 1 && (
-                      <span className="text-[#6B57FF] font-bold ml-1">
+                      <span className="text-[#b8941a] font-bold ml-1">
                         : {item!.quantity}
                       </span>
                     )}
                   </span>
                 </div>
                 {item!.note && (
-                  <p className="text-sm text-gray-400 mt-2 ml-10 italic">
+                  <p className="text-sm text-gray-500 mt-2 ml-10 italic">
                     {item!.note}
                   </p>
                 )}
