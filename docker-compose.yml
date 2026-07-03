@@ -1,10 +1,13 @@
 services:
   app:
-    build: .
+    image: ghcr.io/gizmo3845/child-needs:latest
+    pull_policy: always
+    container_name: child-needs
     ports:
       - "9150:80"
+    volumes:
+      - /home/gizmo/sites/child-needs/data:/app/data
     environment:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
-    volumes:
-      - ./data:/app/data
+      - NODE_ENV=production
     restart: unless-stopped
